@@ -1,0 +1,21 @@
+server:
+  port: 8383
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}?ssl=true&sslmode=verify-full&sslrootcert=${ROOT_CERTIFICATE_PATH}&sslcert=${SERVER_CERTIFICATE_PATH}&sslkey=${SERVER_KEY_PATH}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration # the location where flyway should look for migration scripts
+    validate-on-migrate: true
+    default-schema: test
